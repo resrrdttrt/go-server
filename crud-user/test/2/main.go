@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"errors"
+	"fmt"
 	"log"
 	"net"
 	"net/http"
@@ -14,7 +15,7 @@ import (
 )
 
 func main() {
-	
+	fmt.Println("Hello, world!")
 	if err := run(); err != nil {
 		log.Fatalln(err)
 	}

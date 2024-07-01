@@ -6,12 +6,11 @@ import (
 	"errors"
 
 	"github.com/go-kit/kit/log"
-	uuid "github.com/satori/go.uuid"
 	"golang.org/x/crypto/bcrypt"
 )
 
 type User struct {
-	ID       uuid.UUID `json:"id" gorm:"type:uuid;primary_key;default:uuid_generate_v4()"`
+	ID       string `json:"id" gorm:"type:uuid;primary_key;default:uuid_generate_v4()"`
 	Email    string    `json:"email" gorm:"unique;not null;default:null"`
 	Password string    `json:"password" gorm:"not null;default:null"`
 
@@ -88,7 +87,7 @@ func (repo *repo) UpdateUser(ctx context.Context, user User) error {
 		SET email = $2, password = $3
 		WHERE id = $1`
 
-	if user.ID == uuid.Nil || user.Email == "" || user.Password == ""{
+	if user.ID == "" || user.Email == "" || user.Password == ""{
 		return ErrRepo
 	}
 

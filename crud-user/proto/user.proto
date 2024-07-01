@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "./user/pb";
+
+// The user message representing a user's information
+message User {
+  string id = 1;        // Unique identifier for the user
+  string email = 2;     // User's email address
+  string password = 3;  // User's password
+}
+
+// The request message containing the user ID for the GetUser RPC
+message GetUserRequest {
+  string user_id = 1;   // ID of the user to retrieve
+}
+
+// The response message containing the user's information
+message GetUserResponse {
+  User user = 1;        // The user information
+}
+
+// The request message containing the user information for the UpdateUser RPC
+message UpdateUserRequest {
+  User user = 1;        // The updated user information
+}
+
+// The response message indicating the success of the UpdateUser RPC
+message UpdateUserResponse {
+  bool success = 1;     // Indicates if the update was successful
+}
+
+// The UserService definition
+service UserService {
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+}
